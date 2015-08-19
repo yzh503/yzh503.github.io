@@ -39,9 +39,8 @@ Once you finish installing, boot into Kali, and you will see network device is m
 {% highlight Bash shell script %}
 ifconfig
 {% endhighlight %}
-There is only localhost "lo". To fix this, download the firmware for macbook pro 2015 from [**here**](https://git.kernel.org/cgit/linux/ke...43602-pcie.bin)
+There is only localhost "lo". To fix this, download the firmware for macbook pro 2015 from [**here**](https://git.kernel.org/cgit/linux/ke...43602-pcie.bin).       
 Copy the file into /lib/firmware/brcm
-
 {% highlight Bash shell script %}
 root@kali:~# cp /folder/file /lib/firmware/brcm
 {% endhighlight %}
@@ -50,7 +49,7 @@ Start the network manager by modifying configuration file.
 {% highlight Bash shell script %}
 root@kali:~# nano /etc/NetworkManager/NetworkManager.conf
 {% endhighlight %}
-Turn false to true
+Turn false to true, and restart network manager.
 {% highlight Bash shell script %}
 root@kali:~# /etc/init.d/network-manager restart
 {% endhighlight %}
@@ -63,4 +62,4 @@ Step 3. Restart.
 
 
 ###Summary
-Note that this post is mainly for Macbook pro 2015 this specific model. However, the network part also applies to any linux installation on the computers with same ethernet card. The reason why kali boot loader freezes on MBP 2015 is unknown. There is no enough detailed information about early boot process and Kali boot loader. I'm not sure if something is missing in Kali, or Macbook got something new that conflicts with Kali boot loader, or it's some other mysterous problems. The only thing that we know is that Kali boot loader could not be properly loaded without another bootable linux USB drive. I'll write another post to analyse.
+Note that the booting problem is only reported with Macbook pro 2015 this specific model. The reason why Kali boot loader freezes on MBP 2015 is unknown. There is no enough detailed information about early boot process and Kali boot loader. I'm not sure if anything is missing in Kali, or MBP 2015 got something new that conflicts with Kali boot loader, or it's some other mysterious problems. The only thing that we know is that Kali boot loader could not be properly loaded without another bootable linux USB drive plugged in. I'll write another post to analyse.
