@@ -39,7 +39,7 @@ Once you finish installing, boot into Kali, and you will see network device is m
 {% highlight Bash shell script %}
 ifconfig
 {% endhighlight %}
-There is only localhost "lo".To fix this, download the firmware for macbook pro 2015 from [**here**](https://git.kernel.org/cgit/linux/ke...43602-pcie.bin)
+There is only localhost "lo". To fix this, download the firmware for macbook pro 2015 from [**here**](https://git.kernel.org/cgit/linux/ke...43602-pcie.bin)
 Copy the file into /lib/firmware/brcm
 
 {% highlight Bash shell script %}
