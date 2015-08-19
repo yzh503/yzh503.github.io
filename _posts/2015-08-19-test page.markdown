@@ -1,0 +1,13 @@
+---
+layout: post
+title: Test page
+date: 2015-08-19 
+summary: test
+categories: somethingElse
+tags: 
+ - test
+---
+This is a test page.
+
+newline\
+
