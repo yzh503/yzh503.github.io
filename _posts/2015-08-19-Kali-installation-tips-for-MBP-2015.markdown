@@ -12,7 +12,7 @@ tags:
 ---
 
 ###Background 
-Kali 2.0 live USB does not really well support Macbook pro 2015 Retina. I've seen lots of people having problems like "black screen after booting from EFI", "got a very small freezing menu in the top left corner", and "Legacy bootloader not found". After a few days exploring, I suddenly found a solution to the booting issue (and network), and now Kali 2.0 runs perfectly on my MBP 2015. The following are some tricks I did.
+Kali 2.0 live USB doesn't' really well support Macbook pro 2015 Retina. I've seen lots of people having problems like "black screen after booting from EFI", "got a very small freezing menu in the top left corner", and "Legacy bootloader not found". After a few days exploring, I suddenly found a solution to the booting issue (and network), and now Kali 2.0 runs perfectly on my MBP 2015. The following are some tricks I did.
 
 ###Problems and Solutions 
 
@@ -30,7 +30,7 @@ Step 7. Play with Kali live for a while if you want. To install Kali on hard dis
 
 ####2. Network device not detected
 
-The installation wizard cannot identify ethernet card, so just continue without network configured. We will install the network driver later.
+The installation wizard can't identify ethernet card, so just continue without network configured. We will install the network driver later.
 
 
 ####3. Network driver 
