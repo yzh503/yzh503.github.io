@@ -44,7 +44,7 @@ body {
 	font-weight: 300;
 	background-color: $dark;
 	color: $white;
-	font-size: 14px;
+	font-size: 16px;
 	height: 100%;
 	width: 100%
 }
@@ -542,8 +542,9 @@ ul {
 			padding-top: 10px;
 			padding-bottom: 10px;
 
+            /* This is content font*/
 			@media (min-width: $screen-sm-min) {
-				font-size: 24px;
+				font-size: 16px;
 				padding-left: 30px;
 				padding-right: 30px;
 				padding-top: 40px;
