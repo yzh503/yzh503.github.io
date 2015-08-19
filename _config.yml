@@ -6,7 +6,8 @@ baseurl: ""
 url: "http://yzh503.github.io"
 title_description: "Ramblings of computer science, software development, algorithms, web penetration test... maybe some other interesting stuff. It's a long way from scientific theory to engineered product."
 title_image: "https://en.gravatar.com/userimage/92928099/2795b51533a1beab5b4dfe39ae6b255b.jpg?size=200"
-github_repository: https://github.com/yzh503 
+disqus_account: simonzihaoyang
+github_repository: https://github.com/yzh503
 post_limit: 5
 
 # Social usernames/URLs
