@@ -1,11 +1,27 @@
 # Site settings
-title: 5im0nzy 
+title: "5im0nzy"
 email: simony503@gmail.com
-description: > 
-  Knowing more is less. 
-baseurl: "" 
-url: "http://yzh503.github.io" # the base hostname & protocol for your site
+description: "Feel free to email me."
+baseurl: ""
+url: "http://yzh503.github.io"
+title_description: "It's a long way from scientific theory to engineered product."
+title_image: "https://en.gravatar.com/userimage/92928099/2795b51533a1beab5b4dfe39ae6b255b.jpg?size=200"
+github_repository: https://github.com/yzh503 
+addthis_id: none
+post_limit: 5
+
+# Social usernames/URLs
 github_username: yzh503
+facebook_link: yzh503
+stackoverflow_link: http://stackexchange.com/users/5706748/simon-zihao-yang/
+
+# Footer
+footer_left: "Thanks <a href=\"https://twitter.com/_JacobTomlinson\">Jacob Tomlinson</a> for the amazing theme"
+footer_right: "&lt;/&gt; on <a href=\"https://github.com/yzh503\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
+permalink: pretty
+exclude: [vendor]
