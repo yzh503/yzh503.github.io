@@ -1,5 +1,5 @@
 # Site settings
-title: "5im0nzy"
+title: "Syzygy"
 email: simony503@gmail.com
 description: "Feel free to email me."
 baseurl: ""
@@ -8,6 +8,7 @@ title_description: "Ramblings of computer science, software development, algorit
 title_image: "https://en.gravatar.com/userimage/92928099/2795b51533a1beab5b4dfe39ae6b255b.jpg?size=200"
 disqus_account: yzh503githubio
 github_repository: https://github.com/yzh503
+author_name: "yzh503"
 post_limit: 5
 
 # Social usernames/URLs

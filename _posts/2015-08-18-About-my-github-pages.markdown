@@ -4,6 +4,7 @@ title: About my Github Pages
 date: 2015-08-18 22:02:35
 summary: About how I started
 categories: somethingElse
+author: yzh503
 tags: 
  - about
 ---

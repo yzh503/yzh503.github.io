@@ -29,15 +29,15 @@ layout: default
         <small><i>
           by
           <span itemprop="author">
-            {% if site.google_plus_link %}
-              <a rel="author" href="{{ site.google_plus_link }}">
+            {% if site.facebook_link %}
+              <a rel="author" href="http://facebook.com/{{ site.facebook_link }}">
             {% endif %}
             {% if page.author %}
             <span itemprop="author" itemscope itemtype="http://schema.org/Person">
               <span itemprop="name">{{ page.author }}</span>
             </span>
             {% endif %}
-            {% if site.google_plus_link %}
+            {% if site.facebook_link %}
               </a>
             {% endif %}
           </span>
