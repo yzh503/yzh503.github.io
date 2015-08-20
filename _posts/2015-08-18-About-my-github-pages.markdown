@@ -1,6 +1,6 @@
 ---
 layout: post
-title: About my Github Pages
+title: About my blog
 date: 2015-08-18 
 summary: About how I started
 categories: somethingElse
