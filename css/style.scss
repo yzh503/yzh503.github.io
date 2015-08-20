@@ -535,7 +535,7 @@ ul {
 		}
 
 		.content {
-			font-size: 18px;
+			font-size: 16px;
 			line-height: 170%;
 			padding-left: 15px;
 			padding-right: 15px;
@@ -566,13 +566,13 @@ ul {
 			blockquote {
 				position: relative;
 				width: 100%;
-		    margin-left: -15px;
+		    margin-left: -16px;
 				padding-right: 45px;
 				background-color: $darker;
 				color: white;
 				box-sizing: content-box;
 				border: none;
-				font-size: 28px;
+				font-size: 18px; /* quote font size */
 
 				@media (min-width: $screen-sm-min) {
 					margin-left: -30px;

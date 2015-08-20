@@ -1,10 +1,10 @@
 # Site settings
-title: "Syzygy"
+title: "Sim0n's blog"
 email: simony503@gmail.com
 description: "Feel free to email me."
 baseurl: ""
 url: "http://yzh503.github.io"
-title_description: "Ramblings about computer science, software development, algorithms, web penetration test... maybe some other interesting stuff. It's a long way from scientific theory to engineered product."
+title_description: "Ramblings about computer science, software development, algorithms, web penetration test... maybe some other interesting stuff."
 title_image: "https://en.gravatar.com/userimage/92928099/2795b51533a1beab5b4dfe39ae6b255b.jpg?size=200"
 disqus_account: yzh503githubio
 github_repository: https://github.com/yzh503
