@@ -71,3 +71,6 @@ The format follows "Index password response_time". In the first loop, I sent req
 
 ###Script 
 For this example, I used python to send requests and count time. Requests: HTTP for Humans is an amazing library for HTTP request. You can write extremely simple neat code to send requests with this library. time.time() can be used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the local time, including network latency.
+
+###Prevention 
+By knowing this vulnerability, you will be able to prevent people from attacking you through this way. You can either carefully compare every character, or have a constant response time.
