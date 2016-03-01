@@ -7,7 +7,6 @@ summary: Summarize all solutions
 categories: Linux
 tags: 
  - Kali
- - Macbook
  - Installation
 ---
 
@@ -33,13 +32,17 @@ Step 7. Now the booting menu should not be freezing any more. Graphical install 
 The installation wizard can't identify ethernet card, so just continue without network configured. We will install the network driver later. 
 
 
-####3. Network driver 
+####3. Network driver missing
 
 Once you finish installing, boot into Kali, and you will see network device is missing. Type in terminal
 {% highlight Bash shell script %}
 ifconfig
 {% endhighlight %}
-There is only localhost "lo". To fix this, download the firmware for macbook pro 2015 from [**here**](https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/plain/brcm/brcmfmac43602-pcie.bin).       
+There is no interface for ethernet or Wlan. 
+
+#####If you are using macbook pro 2015
+
+download the firmware from [**here**](https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/plain/brcm/brcmfmac43602-pcie.bin).  
 Copy the file into /lib/firmware/brcm
 {% highlight Bash shell script %}
 root@kali:~# cp /folder/file /lib/firmware/brcm
@@ -54,6 +57,13 @@ Turn false to true, and restart network manager.
 root@kali:~# /etc/init.d/network-manager restart
 {% endhighlight %}
 Reboot and WiFi should work. This may not work on Thunderbolt-Ethernet wired network.
+
+#####If you are using other network card
+{% highlight Bash shell script %}
+lspci
+{% endhighlight %}
+Use this command, find the network controller or ethernet controller model and google it. Try downloading linux wireless/ethernet firmware and put it into the corresponding folder in /lib/firmware/
+
 
 ####4. Cannot boot into OSX
 Step 1. Hold option when booting, and boot from Mac HD.     
