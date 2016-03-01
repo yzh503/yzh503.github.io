@@ -21,7 +21,7 @@ footer_left: "Thanks <a href=\"https://twitter.com/_JacobTomlinson\">Jacob</a> f
 footer_right: "&lt;/&gt; on <a href=\"https://github.com/yzh503\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
 
 # Build settings
-markdown: redcarpet
+markdown: kramdown
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
 permalink: pretty
