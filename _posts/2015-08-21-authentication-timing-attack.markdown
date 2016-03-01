@@ -10,10 +10,10 @@ tags:
  - Authentication Timing Attack
 ---
 
-##Background 
+## Background 
 Non-constant string comparison time is a vulnerablity of web authentication. If a web developer did not set up constant response time, attackers may get the password by comparing response time of requests. In this article, we will use [Web for Pentester II](https://pentesterlab.com/exercises/web_for_pentester_II) authentication exercise 2 as an example. 
 
-##Basics
+## Basics
 ![auth page](http://theimagehost.net/upload/a1a7047fe4a55636d6a11fd3cdc26dd4.png)
 The process of authenticating is as the following:  
 1. The browser sends a HTTP authentication request.     
@@ -28,11 +28,11 @@ Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 "dXNlcm5hbWU6cGFzc3dvcmQ=" is the base64 code of "username:password". The response will give you the status, which is whether you are authenticated or not, and some other content. Status code 200 is success, and 401 is fail. 
 
 
-##How to
+## How to
 Suppose the actual password is "abcde". Comparing "abcde" with "ab123" and "abc123", the second one takes more time than the first one. The first one compares 3 characters, and stops at the third letter. The second one compares 4 letters, and stops at the fourth character. Based on this time difference, you could get the correct characters one by one, by comparing the response time of the auth requests. 
 
 
-##Details
+## Details
 Write a script to send authentication requests, and jot down the response time automatically. For example, this is a part of my ouput.
 {% highlight html%}
 $ python ex2.py
@@ -67,6 +67,9 @@ Select one: 4
 ...
 {% endhighlight %}
 The format follows "Index password response_time". In the first loop, I sent requests with one character as password. "p" took longer to respond, which indicated that p is likely to be contained in the password. With the correct bit confirmed, we can then test on next bit. To make the script more reliable and stable, it is better to be able to select each character manually, and even go back. It has to stop when it finds the correct password (getting response 200). 
+
+### Script 
+For this example, I used python to send requests and count time. Requests: HTTP for Humans is an amazing library for HTTP request. You can write extremely simple neat code to send requests with this library. time.time() can be used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the local time, including network latency.
 
 {% highlight python %}
 import requests
@@ -105,8 +108,5 @@ while True:
 
 {% endhighlight %}
 
-###Script 
-For this example, I used python to send requests and count time. Requests: HTTP for Humans is an amazing library for HTTP request. You can write extremely simple neat code to send requests with this library. time.time() can be used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the local time, including network latency.
-
-###Prevention 
+### Prevention 
 By knowing this vulnerability, you will be able to prevent people from attacking you through this way. You can either carefully compare every character, or have a constant response time.
