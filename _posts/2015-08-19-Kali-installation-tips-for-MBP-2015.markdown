@@ -19,8 +19,8 @@ Kali 2.0 has been out for a while. Most people install Kali on their hard drive 
 ####1. Booting problem
 
 Step 1. Prepare 1 USB sticks and a free partition on your hard disk.     
-Step 2. Make a Kali live USB stick. If you are using Mac,  follow [**link**](http://docs.kali.org/installation/kali-linux-dual-boot-on-mac-hardware) using dd command (It takes over half an hour). Dual Boot with windows see here [**link**](http://docs.kali.org/installation/dual-boot-kali-with-windows)
-Step 3. Re-plug in the USB stick. In your USB drive, Open folders EFI - BOOT. Open syslinux.cfg with a text editor. 
+Step 2. Make a Kali live USB stick. If you are using Mac,  follow [**link**](http://docs.kali.org/installation/kali-linux-dual-boot-on-mac-hardware) using dd command (It takes over half an hour). Dual Boot with windows see here [**link**](http://docs.kali.org/installation/dual-boot-kali-with-windows).   
+Step 3. Re-plug in the USB stick. In your USB drive, Open folders EFI - BOOT. Open syslinux.cfg with a text editor.   
 Step 4. Change "vesamenu.c32" to "menu.c32". Save the file.   
 Step 5. Restart the computer, with the option key pressed.     
 Step 6. Choose the EFI option, which is your usb stick.        
