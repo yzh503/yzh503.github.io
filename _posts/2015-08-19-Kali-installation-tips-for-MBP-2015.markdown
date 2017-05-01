@@ -41,7 +41,7 @@ The installation wizard can't identify ethernet card, so just continue without n
 #### 3. Network driver missing
 
 Once you finish installing, boot into Kali, and you will see network device is missing. Type in terminal
-{% highlight Bash shell script %}
+{% highlight shell %}
 ifconfig
 {% endhighlight %}
 There is no interface for ethernet or Wlan. 
@@ -50,22 +50,22 @@ There is no interface for ethernet or Wlan.
 
 download the firmware from [**here**](https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/plain/brcm/brcmfmac43602-pcie.bin).  
 Copy the file into /lib/firmware/brcm
-{% highlight Bash shell script %}
+{% highlight shell %}
 root@kali:~# cp /folder/file /lib/firmware/brcm
 {% endhighlight %}
 Reboot and you will see WiFi is working, but still has no network access.   
 Start the network manager by modifying configuration file.
-{% highlight Bash shell script %}
+{% highlight shell %}
 root@kali:~# nano /etc/NetworkManager/NetworkManager.conf
 {% endhighlight %}
 Turn false to true, and restart network manager.
-{% highlight Bash shell script %}
+{% highlight shell %}
 root@kali:~# /etc/init.d/network-manager restart
 {% endhighlight %}
 Reboot and WiFi should work. This may not work on Thunderbolt-Ethernet wired network.
 
 ##### If you are using other network card
-{% highlight Bash shell script %}
+{% highlight shell %}
 lspci
 {% endhighlight %}
 Use this command, find the network controller or ethernet controller model and google it. Try downloading linux wireless/ethernet firmware and put it into the corresponding folder in /lib/firmware/

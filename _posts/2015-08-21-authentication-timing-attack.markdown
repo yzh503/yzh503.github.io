@@ -20,7 +20,7 @@ The process of authenticating is as the following:
 2. The server compares the strings, and sends response.  
 
 There are different types of auth requests, such as Basic, Digest, and custom authentication. The username and password are concealed in the HTTP header. This is the header of Basic Authentication, which is the type of authentication in this example.
-{% highlight html %}
+{% highlight http %}
 GET /authentication/example2 HTTP/1.1
 Host: http://192.168.56.101
 Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
@@ -34,7 +34,7 @@ Suppose the actual password is "abcde". Comparing "abcde" with "ab123" and "abc1
 
 ## Details
 Write a script to send authentication requests, and jot down the response time automatically. For example, this is a part of my ouput.
-{% highlight html%}
+{% highlight shell%}
 $ python ex2.py
  0 0 1.408078
  1 1 1.408148

@@ -1,12 +1,13 @@
 # Site settings
-title: "Yang, Z. S. (2015)"
+title: "Simon's blog"
 email: simony503@gmail.com
 description: "Feel free to email me."
 baseurl: ""
 url: "http://www.simoniser.com"
 title_description: "Ramblings about computer science, software development, algorithms, web penetration test... maybe some other interesting stuff."
-title_image: "https://en.gravatar.com/userimage/92928099/2795b51533a1beab5b4dfe39ae6b255b.jpg?size=200"
+title_image: "/Logo.jpg"
 disqus_account: yzh503githubio
+twitter_username: yzh503
 github_repository: https://github.com/yzh503
 addthis_id: ra-55d5952a46bf3aa2
 post_limit: 5
@@ -17,7 +18,7 @@ facebook_link: yzh503
 stackoverflow_link: http://stackexchange.com/users/5706748/simon-zihao-yang/
 
 # Footer
-footer_left: "Theme from <a href=\"http://jekyllthemes.org/themes/carte-noire\">Here</a>"
+footer_left: "Theme made by <a href=\"http://jekyllthemes.org/themes/carte-noire\">Jacob Tomlinson</a>"
 footer_right: "&lt;/&gt; on <a href=\"https://github.com/yzh503\">Github</a> &nbsp;<i class=\"fa fa-github-alt\"></i>"
 
 # Build settings
