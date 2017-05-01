@@ -100,7 +100,7 @@ while True:
             break
     if psw_found:
         break
-    print('--------------------')
+    print '--------------------'
     suggest = index
     print 'Suggest: ', suggest
     select = input('Select one: ')
