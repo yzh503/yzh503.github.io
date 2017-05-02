@@ -3,7 +3,7 @@ layout: post
 title: Authentication Timing Attack
 date: 2015-08-21
 author: Simon
-summary: Get the password of web authentication.
+summary: Guess the password in basic web authentication.
 categories: Web_Penetration
 tags: 
  - Web penetration
@@ -11,25 +11,25 @@ tags:
 ---
 
 ## Background 
-Non-constant string comparison time is a vulnerablity of web authentication. If a web developer did not set up constant response time, attackers may get the password by comparing response time of requests. In this article, we will use [Web for Pentester II](https://pentesterlab.com/exercises/web_for_pentester_II) authentication exercise 2 as an example. 
+Non-constant string comparison time can be a vulnerablity of Basic web authentication. If a web developer did not set up constant response time, attackers may get the password by comparing response time of requests. In this article, we will use [Web for Pentester II](https://pentesterlab.com/exercises/web_for_pentester_II) authentication exercise 2 as an example. 
 
 ## Basics
-![auth page](http://theimagehost.net/upload/a1a7047fe4a55636d6a11fd3cdc26dd4.png)
+![auth page](/img/2015-08-21-authentication-timing-attack.png){:width="500px"}
 The process of authenticating is as the following:  
 1. The browser sends a HTTP authentication request.     
 2. The server compares the strings, and sends response.  
 
-There are different types of auth requests, such as Basic, Digest, and custom authentication. The username and password are concealed in the HTTP header. This is the header of Basic Authentication, which is the type of authentication in this example.
+There are other types of auth requests than Basic, such as Digest and custom authentication. The username and password are concealed in the HTTP header. This is the header of Basic Authentication, which is the type of authentication in this example.
 {% highlight http %}
 GET /authentication/example2 HTTP/1.1
 Host: http://192.168.56.101
 Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 {% endhighlight %}
-"dXNlcm5hbWU6cGFzc3dvcmQ=" is the base64 code of "username:password". The response will give you the status, which is whether you are authenticated or not, and some other content. Status code 200 is success, and 401 is fail. 
+`dXNlcm5hbWU6cGFzc3dvcmQ=` is the base64 code of `username:password`. The response will give you the status, which is whether you are authenticated or not, and some other content. Status code 200 is success, and 401 is fail. 
 
 
 ## How to
-Suppose the actual password is "abcde". Comparing "abcde" with "ab123" and "abc123", the second one takes more time than the first one. The first one compares 3 characters, and stops at the third letter. The second one compares 4 letters, and stops at the fourth character. Based on this time difference, you could get the correct characters one by one, by comparing the response time of the auth requests. 
+Suppose the actual password is `abcde`. Comparing `abcde` with `ab123` and `abc123`, the second one takes more time than the first one. With `ab123`, it compares 3 characters, and stops at the third letter. With `abc123`, it compares 4 letters, and stops at the fourth character. Based on this time difference, you could get the correct characters by comparing the response time of auth requests. 
 
 
 ## Details
@@ -66,10 +66,10 @@ Select one: 4
  2 p42 1.808867
 ...
 {% endhighlight %}
-The format follows "Index password response_time". In the first loop, I sent requests with one character as password. "p" took longer to respond, which indicated that p is likely to be contained in the password. With the correct bit confirmed, we can then test on next bit. To make the script more reliable and stable, it is better to be able to select each character manually, and even go back. It has to stop when it finds the correct password (getting response 200). 
+The output `0 p40 1.809672` means `Index password response_time`. In the first loop, I send requests with one character as password. "p" took longer to respond, which indicated that p is likely to be contained in the password. With the correct bit confirmed, we can then test the next byte. It stops when it finds the correct password (getting response 200). 
 
 ### Script 
-For this example, I used python to send requests and count time. Requests: HTTP for Humans is an amazing library for HTTP request. You can write extremely simple neat code to send requests with this library. time.time() can be used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the local time, including network latency.
+In this example, Python 2.7 was used to send requests and count time. `Requests: HTTP for Humans` is an easy-to-use library for HTTP requests. time.time() is used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the wall clock time, considering other factors such as network latency.
 
 {% highlight python %}
 import requests
@@ -109,4 +109,4 @@ while True:
 {% endhighlight %}
 
 ### Prevention 
-By knowing this vulnerability, you will be able to prevent people from attacking you through this way. You can either carefully compare every character, or have a constant response time.
+To prevent this vulnerability, either have a constant response time or use a more secure authentication technique.
