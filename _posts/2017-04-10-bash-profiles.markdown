@@ -13,7 +13,7 @@ tags:
 ---
 
 # Summary Ahead
-**~/.bash_profile** **~/.bash_login**,  and  **~/.profile** are read by login shell, but only the first one existing will be loaded by default.
+**~/.bash_profile** **~/.bash_login**,  and  **~/.profile** are read by login shell in that order, but only the first one existing will be loaded by default.
 
 **~/.bashrc** is loaded in non-login shell if it exsits. 
 
