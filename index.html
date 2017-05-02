@@ -28,7 +28,7 @@ layout: default
 
               <ul>
                  
-                  {% for post in site.posts limit:site.max_posts %}
+                  {% for post in site.posts limit:10 %}
 
                       <li>
                           <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
@@ -44,7 +44,7 @@ layout: default
 
                   {% endfor %}
                   <li>
-                      <small><i><a href="{{ site.baseurl }}/posts/">more...</a></i></small>
+                      <i><a href="{{ site.baseurl }}/posts/">more...</a></i>
                   </li>
               </ul>
 
