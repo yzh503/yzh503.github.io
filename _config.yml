@@ -24,6 +24,7 @@ footer_right: "&lt;/&gt; on <a href=\"https://github.com/yzh503\">Github</a> &nb
 # Build settings
 markdown: kramdown
 highlighter: rouge
+
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
 permalink: pretty
