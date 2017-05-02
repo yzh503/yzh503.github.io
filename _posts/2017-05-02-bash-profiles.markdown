@@ -1,15 +1,15 @@
 ---
 layout: post
 title: Bash Profiles
-date: 2017-04-10
+date: 2017-05-02
 author: Simon
 summary: What is the difference between .profile, .bash_profile and .bashrc?
 categories: system
 tags: 
- - Bash
- - Linux
- - Unix
- - System
+ - bash
+ - linux
+ - unix
+ - system
 ---
 
 # Summary Ahead

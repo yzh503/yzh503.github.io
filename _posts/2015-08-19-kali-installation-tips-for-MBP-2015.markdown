@@ -6,7 +6,7 @@ author: Simon
 summary: The problems of "unable to boot from USB"
 categories: system
 tags: 
- - Kali
+ - kali
  - Installation
 ---
 

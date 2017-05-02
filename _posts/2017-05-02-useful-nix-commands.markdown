@@ -6,11 +6,11 @@ author: Simon
 summary: Get familiar with command line interface
 categories: cli
 tags: 
- - Bash
- - Linux
- - Unix
- - System
- - Shell
+ - bash
+ - linux
+ - unix
+ - system
+ - shell
 ---
 
 # How do commands work?

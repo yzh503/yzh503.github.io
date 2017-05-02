@@ -6,8 +6,8 @@ author: Simon
 summary: Guess the password in basic web authentication.
 categories: security
 tags: 
- - Web penetration
- - Authentication Timing Attack
+ - security
+ - timing attack
 ---
 
 ## Background 
