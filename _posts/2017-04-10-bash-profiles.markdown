@@ -30,10 +30,10 @@ When bash is a login shell, or invoked with `--login`, it firstly reads and exec
 When it  is  not a login shell, bash reads and executes commands from /etc/bash.bashrc and **~/.bashrc**, if they exist. 
 
 ### Exiting
-When a login shell exits, bash reads and executes commands from the file 
+When a login shell exits, bash reads and executes commands from the file **~/.bash_logout**, if it exists. 
 
 ### Options
-**~/.bash_logout**, if it exists.
+
 
 The `--noprofile` and `--norc` may be used to start a login and non-login shell without loading profiles.
 
