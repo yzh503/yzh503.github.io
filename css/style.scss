@@ -56,7 +56,7 @@ a, a:active {
 }
 
 a:hover {
-	color: $dark-blue;
+	color: $light-blue;
 	text-decoration: none;
 }
 
@@ -115,8 +115,14 @@ ul {
 	margin-top: 20px;
 	box-shadow: 0px 0px 0px 0px, 0px 6px 12px rgba(0, 0, 0, 0.2);
 	border-bottom: 5px solid $light-blue;
+	
 }
 
+.content{
+a{
+		text-decoration: underline;
+	}
+}
 #my-menu {
 
 	p {
@@ -669,16 +675,22 @@ ul {
 		margin-bottom: 20px;
 
 		a {
-			color: $darker;
+			color: $white;
 			font-size: 18px;
 			width: auto;
 			padding: 10px 20px;
-			background-color: $darker;
+			background-color: $dark-blue;
 			box-shadow: 0px 0px 0px 0px, 0px 6px 12px rgba(0, 0, 0, 0.2);
 		}
 
 		a:hover {
-			color: $dark-blue;
+			color: $light-blue;
+		}
+	}
+	.excerpt{
+		a{
+			font-weight: 400;
+			font-size: 24px;
 		}
 	}
 
@@ -696,7 +708,7 @@ ul {
 		}
 
 		a:hover {
-			color: $light;
+			color: $light-blue;
 		}
 	}
 
@@ -712,7 +724,7 @@ ul {
 		}
 
 		a:hover {
-			color: $light;
+			color: $light-blue;
 		}
 	}
 
