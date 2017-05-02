@@ -4,7 +4,7 @@ title: Authentication Timing Attack
 date: 2015-08-21
 author: Simon
 summary: Guess the password in basic web authentication.
-categories: Web_Penetration
+categories: security
 tags: 
  - Web penetration
  - Authentication Timing Attack
