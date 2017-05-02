@@ -33,6 +33,13 @@ layout: default
                       <li>
                           <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
                           <small class="hidden-xs">{{ post.date | date: "%B %-d, %Y" }}</small>
+                          <div class="excerpt">
+                            {% if post.summary %}
+                                {{ post.summary | strip_html | truncatewords:30 }}
+                            {% else %}
+                                {{ post.excerpt | strip_html | truncatewords:30 }}
+                            {% endif %}
+                          </div>
                       </li>
 
                   {% endfor %}
