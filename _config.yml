@@ -1,13 +1,13 @@
 # Site settings
 title: "Simon Yzh"
-email: simony503@gmail.com
+email: yzh503@live.com
 description: "Feel free to email me."
 baseurl: ""
-url: "http://www.simoniser.com"
+url: "http://yzh503.github.io"
 title_description: "Ramblings about computer science, software development, algorithms, security... and some other interesting stuff."
 title_image: "/Logo.jpg"
 disqus_account: yzh503githubio
-twitter_username: yzh503
+twitter_username: zyan503
 github_repository: https://github.com/yzh503
 addthis_id: ra-55d5952a46bf3aa2
 post_limit: 5
@@ -15,7 +15,7 @@ post_limit: 5
 # Social usernames/URLs
 github_username: yzh503
 facebook_link: yzh503
-stackoverflow_link: http://stackexchange.com/users/5706748/simon-zihao-yang/
+stackoverflow_link: http://stackoverflow.com/users/4509985/
 
 # Footer
 footer_left: "Theme derived from <a href=\"http://jekyllthemes.org/themes/carte-noire\">Jacob Tomlinson</a>"
