@@ -2,7 +2,7 @@
 layout: post
 title: Authentication Timing Attack
 date: 2015-08-21
-author: yzh503
+author: Simon
 summary: Get the password of web authentication.
 categories: Web_Penetration
 tags: 

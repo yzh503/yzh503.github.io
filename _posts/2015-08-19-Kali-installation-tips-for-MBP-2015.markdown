@@ -2,7 +2,7 @@
 layout: post
 title: Kali installation tips for mac
 date: 2015-08-19 
-author: yzh503
+author: Simon
 summary: Summarize all solutions
 categories: Linux
 tags: 
