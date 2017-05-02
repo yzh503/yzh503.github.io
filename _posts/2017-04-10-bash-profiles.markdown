@@ -33,8 +33,6 @@ When it  is  not a login shell, bash reads and executes commands from /etc/bash.
 When a login shell exits, bash reads and executes commands from the file **~/.bash_logout**, if it exists. 
 
 ### Options
-
-
 The `--noprofile` and `--norc` may be used to start a login and non-login shell without loading profiles.
 
 The `--rcfile` option will force bash to read and execute commands from a user specified file instead of /etc/bash.bashrc and **~/.bashrc**. 
