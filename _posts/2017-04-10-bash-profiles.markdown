@@ -27,8 +27,7 @@ Bash was developed as a part of GNU project, and now extensively distributed in 
 When bash is a login shell, or invoked with `--login`, it firstly reads and executes commands from the file /etc/profile, if that file exists. Then, it looks for **~/.bash_profile** **~/.bash_login**,  and  .profile, in that order. It **only reads the first one** that is existing and readable. 
 
 ### Non-login Shell
-When it  is  not a login shell, bash reads and executes commands from /etc/bash.bashrc and **~/.bashrc**, if they exist. This may be inhibited by using the --norc option.  
-
+When it  is  not a login shell, bash reads and executes commands from /etc/bash.bashrc and **~/.bashrc**, if they exist. 
 
 ### Exiting
 When a login shell exits, bash reads and executes commands from the file 
@@ -36,7 +35,7 @@ When a login shell exits, bash reads and executes commands from the file
 ### Options
 **~/.bash_logout**, if it exists.
 
-The `--noprofile` and `--norcoption` may be used to start a login and non-login shell without loading profiles.
+The `--noprofile` and `--norc` may be used to start a login and non-login shell without loading profiles.
 
 The `--rcfile` option will force bash to read and execute commands from a user specified file instead of /etc/bash.bashrc and **~/.bashrc**. 
 
