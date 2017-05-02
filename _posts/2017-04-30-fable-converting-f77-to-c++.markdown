@@ -31,6 +31,20 @@ fable.cout code.f --namespace=code > code.cpp
 The converter does not automatically “link” external functions. Placeholders of missing functions will be generated in absence of external function definition. The converted C++ code needs to be modified manually to replace the body of the external function with the real implementation. You may convert multiple Fortran files to one C++ file and sequentially separate C++ funtions to different files. Included files in Fortran will be automatically detected. 
 
 # Problems
+### Dependency
+It may return an error with dependency problems. 
+{% highlight shell %}
+$ g++ test.cpp
+test.cpp:1:10: fatal error: 'fem.hpp' file not found
+1 error generated. 
+{% endhighlight %}
+In most cases, we can solve this issue by including the library path:
+{% highlight shell %}
+$ g++ test.cpp -I/installation_path/modules/cctbx_project/fable
+{% endhighlight %}
+If the library folder lacks tbxx, copy tbxx from [cctbx library](https://github.com/cctbx/cctbx_project). 
+
+### Equivalence
 Equivalence and common vairables are commonly used for shared resources in Fortran 77. With fable version 1022, no more than 7 equivalent variables are allowed in conversion, that is, an equivalence cannot have more than 7 symbols. 
 
 The following code is convertible
