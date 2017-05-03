@@ -104,6 +104,14 @@ rm is a dangerous command. [**rmtrash**](https://github.com/PhrozenByte/rmtrash)
 $ program &
 {% endhighlight %}
 Use process control commands to manage them, such as `ps`, `jobs`, `fg`, `bg`, `kill`.
+
+# Measure the execution time of a program
+Simplest way:
+{% highlight shell %}
+$ time program
+{% endhighlight %}
+
+
 # Reference
 Below tables are derived from [here](http://courses.cs.washington.edu/courses/cse390a/14au/bash.html).
 <table id="commands" class="standard" >
