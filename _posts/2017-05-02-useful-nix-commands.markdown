@@ -96,16 +96,16 @@ $ cat file.output | grep "text" # searching text
 
 Bash also support regular expression, which is powerful for pattern matching. 
 
-# Remove
+### Remove
 rm is a dangerous command. [**rmtrash**](https://github.com/PhrozenByte/rmtrash) is an alternative to rm that puts files using trush-put. 
 
-# Run a program without getting out of the shell
+### Run a program without getting out of the shell
 {% highlight shell %}
 $ program &
 {% endhighlight %}
 Use process control commands to manage them, such as `ps`, `jobs`, `fg`, `bg`, `kill`.
 
-# Measure the execution time of a program
+### Measure the execution time of a program
 Simplest way:
 {% highlight shell %}
 $ time program
