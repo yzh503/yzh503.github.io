@@ -97,7 +97,7 @@ $ cat file.output | grep "text" # searching text
 Bash also support regular expression, which is powerful for pattern matching. 
 
 # Remove
-rm is a dangerous command. [**rmtrash**] is an alternative to rm that puts files using trush-put. 
+rm is a dangerous command. [**rmtrash**](https://github.com/PhrozenByte/rmtrash) is an alternative to rm that puts files using trush-put. 
 
 # Run a program without getting out of the shell
 {% highlight shell %}
