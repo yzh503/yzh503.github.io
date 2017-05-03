@@ -11,7 +11,7 @@ tags:
  - c++
 ---
 # Why converting Fortran to C++
-Many legacy Fortran programs are still stable and running in the industry. It is often difficult to maintain and extend the legacy code (well, difficult compared with modern languages). I was developing an extension on a Fortran 77 program, but F77 does not support many important modern programming features, which really gave me a hetic. Converting old Fortran to C/C++, it is hoped that we can use C++ features to extend an old program, although it would not improve the readibilty of code at all. 
+Many legacy Fortran programs are still stable and running in the industry. It is often difficult to maintain and extend the legacy code (well, difficult compared with modern languages). I was developing an extension on a Fortran 77 program, but F77 does not support many important modern programming features, which really gave me a hetic. Converting old Fortran to C/C++, it is hoped that we can use C++ features to extend an old program, although it would not improve the readibilty of the code at all. 
 
 In this article commands are executed in Linux/Unix environment.
 
@@ -40,9 +40,9 @@ test.cpp:1:10: fatal error: 'fem.hpp' file not found
 {% endhighlight %}
 In most cases, we can solve this issue by including the library path:
 {% highlight shell %}
-$ g++ test.cpp -I/installation_path/modules/cctbx_project/fable
+$ g++ test.cpp -I/.../cctbx_project/fable
 {% endhighlight %}
-If the library folder lacks tbxx, copy tbxx from [cctbx library](https://github.com/cctbx/cctbx_project). 
+If you did not find where the folder is, just download the entire project [cctbx library](https://github.com/cctbx/cctbx_project) and include the fable folder. If the library folder lacks tbxx, copy tbxx into the fable folder.  
 
 ### Equivalence
 Equivalence and common vairables are commonly used for shared resources in Fortran 77. With fable version 1022, no more than 7 equivalent variables are allowed in conversion, that is, an equivalence cannot have more than 7 symbols. 
