@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This is Simon's blog.
+This is Simon's blog. Never gets updated... 
