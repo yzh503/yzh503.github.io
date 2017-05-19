@@ -18,7 +18,7 @@ tags:
 **~/.bashrc** is loaded in non-login shell if it exsits. 
 
 # Background
-Bash was developed as a part of GNU project, and now extensively distributed in the POSIX sytems. It uses a collection of startup files to help create an environment. **~/.profile**, **~/.bash_profile** and **~/.bashrc** are the common ones located in the home directory. 
+Bash was developed as a part of GNU project, and is now extensively distributed in the POSIX sytems. It loads a collection of startup files to help create an environment. **~/.profile**, **~/.bash_profile** and **~/.bashrc** are the common ones located in the home directory. 
 
 # What are the differences?
 **~/.bash_profile**, **~/.bash_login**, **~/.bash_logout** and **~/.bashrc** are specific to the Bash shell, while .profile is a generic config file read by many shells when their specific config files are missing. 

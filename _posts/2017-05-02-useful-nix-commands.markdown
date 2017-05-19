@@ -14,7 +14,7 @@ tags:
 ---
 
 # How do commands work?
-In Unix/Linux systems, commands in a Unix shell are all programs. Anything you enter into the shell is called standard input. Similarly, Anything printed on the shell is standard output. programs are binary files, which contains computer readable code. By default, all commands/programs invoked from the shell are located somewhere in the system. Not all programs in the system can be directly called in the shell. For example,
+In Unix/Linux systems, commands in a Unix shell are all programs. Anything you enter into the shell is called standard input. Similarly, anything printed on the shell is standard output. programs are binary files, which contains computer readable code. By default, all commands/programs invoked from the shell are located somewhere in the system. Not all programs in the system can be directly called in the shell. For example,
 {% highlight shell %}
 $ echo "echo is a program located in /bin"
 echo is a program located in /bin/echo
@@ -30,7 +30,7 @@ The most direct way of executing a program in the shell is to enter the absolute
 $ /bin/echo "This is a parameter"
 This is a parameter
 {% endhighlight %}
-`/bin/echo` is the path echo, and the string is a parameter. The Environment variable $PATH tells the shell where all the commands are from. Internally, the shell looks for the program in the directories listed in $PATH ($var indicates variable in the Bash shell). If you want to make a program into a command and run it without entering its path, you will need to manually add the path into $PATH. For one-time use, run the command to add /opt/bin/ into $PATH, 
+`/bin/echo` is the path echo, and the string is a parameter. The Environment variable $PATH tells the shell where all the commands are from. Internally, the shell looks for the program in the directories listed in $PATH ($var indicates variable in the Bash shell). If you want to make a program into a command and run it without entering its path, you will need to manually add the path into $PATH. For one-time use, run the command to add a path into $PATH. For example, 
 {% highlight shell %}
 $ PATH=$PATH:~/opt/bin
 {% endhighlight %}
