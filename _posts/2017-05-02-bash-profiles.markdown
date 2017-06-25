@@ -37,10 +37,15 @@ The `--noprofile` and `--norc` may be used to start a login and non-login shell 
 
 The `--rcfile` option will force bash to read and execute commands from a user specified file instead of /etc/bash.bashrc and **~/.bashrc**. 
 
-### Load
-For convenience, people usually load all other files in .bash_profile and .bashrc. For example, 
+### Lazy Loading
+For convenience, people usually load other profiles in one. For example, in .profile, 
 {% highlight shell %}
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile 
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
 {% endhighlight %}
 
 # References
