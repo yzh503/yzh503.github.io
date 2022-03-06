@@ -1,10 +1,10 @@
 # Site settings
-title: "Simon Yzh"
+title: "Simonised Area"
 email: yzh503@live.com
-description: "Feel free to email me."
+description: "Feel free to send an email."
 baseurl: ""
 url: "http://yzh503.github.io"
-title_description: "Ramblings about computer science, software development, algorithms, security... and some other interesting stuff."
+title_description: "Rambling about coding..."
 title_image: "/Logo.jpg"
 disqus_account: simonzyang
 disqus_shortname: yzh503-github-io
