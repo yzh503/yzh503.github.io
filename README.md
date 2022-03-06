@@ -1,4 +1,4 @@
 # yzh503
  
-This is Simon's blog.
-Lazy;
+This is Simonised Area. 
+Being Lazy now;
