@@ -1,0 +1,38 @@
+I"Ì<h1 id="summary-ahead">Summary Ahead</h1>
+<p><strong>~/.bash_profile</strong> <strong>~/.bash_login</strong>,  and  <strong>~/.profile</strong> are read by login shell in that order, but only the first one existing will be loaded by default.</p>
+
+<p><strong>~/.bashrc</strong> is loaded in non-login shell if it exsits.</p>
+
+<h1 id="background">Background</h1>
+<p>Bash was developed as a part of GNU project, and is now extensively distributed in the POSIX sytems. It loads a collection of startup files to help create an environment. <strong>~/.profile</strong>, <strong>~/.bash_profile</strong> and <strong>~/.bashrc</strong> are the common ones located in the home directory.</p>
+
+<h1 id="what-are-the-differences">What are the differences?</h1>
+<p><strong>~/.bash_profile</strong>, <strong>~/.bash_login</strong>, <strong>~/.bash_logout</strong> and <strong>~/.bashrc</strong> are specific to the Bash shell, while .profile is a generic config file read by many shells when their specific config files are missing.</p>
+
+<h3 id="login-shell">Login Shell</h3>
+<p>When bash is a login shell, or invoked with <code class="language-plaintext highlighter-rouge">--login</code>, it firstly reads and executes commands from the file /etc/profile, if that file exists. Then, it looks for <strong>~/.bash_profile</strong> <strong>~/.bash_login</strong>,  and  .profile, in that order. It <strong>only reads the first one</strong> that is existing and readable.</p>
+
+<h3 id="non-login-shell">Non-login Shell</h3>
+<p>When it  is  not a login shell, bash reads and executes commands from /etc/bash.bashrc and <strong>~/.bashrc</strong>, if they exist.</p>
+
+<h3 id="exiting">Exiting</h3>
+<p>When a login shell exits, bash reads and executes commands from the file <strong>~/.bash_logout</strong>, if it exists.</p>
+
+<h3 id="options">Options</h3>
+<p>The <code class="language-plaintext highlighter-rouge">--noprofile</code> and <code class="language-plaintext highlighter-rouge">--norc</code> may be used to start a login and non-login shell without loading profiles.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">--rcfile</code> option will force bash to read and execute commands from a user specified file instead of /etc/bash.bashrc and <strong>~/.bashrc</strong>.</p>
+
+<h3 id="lazy-loading">Lazy Loading</h3>
+<p>For convenience, people usually load other profiles in one. For example, in .profile,</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="k">if</span> <span class="o">[</span> <span class="nt">-n</span> <span class="s2">"</span><span class="nv">$BASH_VERSION</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="c"># include .bashrc if it exists</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">.</span> <span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.bashrc"</span>
+    <span class="k">fi
+fi</span></code></pre></figure>
+
+<h1 id="references">References</h1>
+<p>Bash man page.</p>
+:ET

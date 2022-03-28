@@ -1,0 +1,54 @@
+I"0<h1 id="background">Background</h1>
+<p>Kali 2.0 has been released for a while. Most people install Kali on the hard drive through a usb drive. I’ve seen a lot of people having problems of “black screen after booting from EFI”, “got a very small freezing menu in the top left corner” and “Legacy bootloader not found” when trying installing on a Mac. After a few days exploring, I found a solution to the booting issue (and network driver), and now it runs perfectly on my MBP 2015.</p>
+
+<h2 id="problems-and-solutions">Problems and Solutions</h2>
+
+<h3 id="1-booting-problem">1. Booting problem</h3>
+<p>Installation drive boot options screen freezes on Macbook pro 2015 when booting from usb.</p>
+
+<p>Step 1. Prepare 1 USB sticks and a free partition on your hard disk.<br />
+Step 2. Make a Kali live USB stick following the <a href="http://docs.kali.org/downloading/kali-linux-live-usb-install"><strong>steps</strong></a>.<br />
+Step 3. On Mac, open folders EFI - BOOT in your usb drive. Open syslinux.cfg with a text editor.<br />
+Step 4. Change “vesamenu.c32” to “menu.c32”. Save the file.<br />
+Step 5. Restart the computer, with the option key pressed.<br />
+Step 6. Choose the EFI option, which is your usb stick.<br />
+Step 7. Now the boot options should not be freezing any more. Graphical install and install options should work. If this does not work for you, you may stop reading further.</p>
+
+<h4 id="2-network-device-not-detected">2. Network device not detected</h4>
+<p>The installation wizard can’t identify ethernet card, so just continue without network configured. We will install the network driver later.</p>
+
+<h4 id="3-network-driver-missing">3. Network driver missing</h4>
+<p>Once you finish installing, boot into Kali, and you will see network device is missing. Type in terminal</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ifconfig</code></pre></figure>
+
+<p>There is no interface for ethernet or WLAN.</p>
+
+<h5 id="if-you-are-using-macbook-pro-2015-original-wifi-adapter">If you are using macbook pro 2015 original wifi adapter</h5>
+<p>Download the firmware from <a href="https://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/plain/brcm/brcmfmac43602-pcie.bin"><strong>here</strong></a>.<br />
+Copy the file into /lib/firmware/brcm</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">root@kali:~# <span class="nb">cp</span> /folder/file /lib/firmware/brcm</code></pre></figure>
+
+<p>Reboot and you will see WiFi is working, but still has no network access. <br />
+Start the network manager by modifying configuration file.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">root@kali:~# nano /etc/NetworkManager/NetworkManager.conf</code></pre></figure>
+
+<p>Turn false to true, and restart network manager.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">root@kali:~# /etc/init.d/network-manager restart</code></pre></figure>
+
+<p>Reboot and WiFi should work. This may not work on Thunderbolt-Ethernet wired network.</p>
+
+<h5 id="if-you-are-using-other-network-card">If you are using other network card</h5>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">lspci</code></pre></figure>
+
+<p>lspci is a tool that prints the information about PCI buses and devices in the system. Using this command, find the network controller or ethernet controller model. Try downloading the linux wireless/ethernet firmware that matches the network controller model and put it into the corresponding folder in <code class="language-plaintext highlighter-rouge">/lib/firmware/</code></p>
+
+<h4 id="4-cannot-boot-into-osx">4. Cannot boot into OSX</h4>
+<p>Step 1. Hold option when booting, and boot from Mac HD.   <br />
+Step 2. Reinstall your rEFInd.<br />
+Step 3. Restart.</p>
+:ET

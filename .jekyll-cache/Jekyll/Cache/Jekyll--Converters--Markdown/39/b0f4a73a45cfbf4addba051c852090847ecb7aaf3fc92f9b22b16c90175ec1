@@ -1,0 +1,3 @@
+I"�<h1 id="background">Background</h1>
+<p>Kali 2.0 has been released for a while. Most people install Kali on the hard drive through a usb drive. I’ve seen a lot of people having problems of “black screen after booting from EFI”, “got a very small freezing menu in the top left corner” and “Legacy bootloader not found” when trying installing on a Mac. After a few days exploring, I found a solution to the booting issue (and network driver), and now it runs perfectly on my MBP 2015.</p>
+:ET

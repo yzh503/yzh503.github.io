@@ -1,0 +1,3 @@
+I"ö<h1 id="summary-ahead">Summary Ahead</h1>
+<p><strong>~/.bash_profile</strong> <strong>~/.bash_login</strong>,  and  <strong>~/.profile</strong> are read by login shell in that order, but only the first one existing will be loaded by default.</p>
+:ET

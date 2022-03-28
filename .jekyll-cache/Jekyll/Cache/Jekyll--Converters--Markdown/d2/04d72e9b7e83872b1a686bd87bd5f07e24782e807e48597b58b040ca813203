@@ -1,0 +1,3 @@
+I"¡<h1 id="background">Background</h1>
+<p>SQL injection is a type of vulnerability of many databases. It is often possible to insert your own sql query into the origin sql query to bypass the authentication page or to get sensitive information. There are a bunch of good examples for web penetration testing in <a href="http://pentesterlab.com">Pentester Lab</a>. In this article, we will go through each one in the tutorial <a href="https://pentesterlab.com/exercises/web_for_pentester_II">Web for Pentester II</a>. Make sure you allocate &gt;= 1 GB RAM, and setup host-only network. Open the page with the IP of the VM (get the IP using nmap or type ifconfig in the VM)</p>
+:ET

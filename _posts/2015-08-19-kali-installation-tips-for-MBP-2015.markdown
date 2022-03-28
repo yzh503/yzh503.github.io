@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kali installation tips for mac
+title: Kali installation tips for Macbooks
 date: 2015-08-19 
 author: Simon
 summary: The problems of "unable to boot from USB"

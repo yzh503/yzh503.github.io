@@ -1,0 +1,27 @@
+I"Z<h1 id="how-do-commands-work">How do commands work?</h1>
+<p>In Unix/Linux systems, commands in a Unix shell are all programs. Anything you enter into the shell is called standard input. Similarly, anything printed on the shell is standard output. programs are binary files, which contains computer readable code. By default, all commands/programs invoked from the shell are located somewhere in the system. Not all programs in the system can be directly called in the shell. For example,</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"echo is a program located in /bin"</span>
+<span class="nb">echo </span>is a program located <span class="k">in</span> /bin/echo</code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">echo</code> is a common command in Linux/Unix. It is in fact a program located in the directory <code class="language-plaintext highlighter-rouge">/bin</code>. Let’s see where it is located.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>whereis <span class="nb">echo
+echo</span>: /bin/echo /usr/share/man/man1/echo.1.gz</code></pre></figure>
+
+<p>How does the shell know where it is located? 
+The most direct way of executing a program in the shell is to enter the absolute/relative path of the prgram followed by parameter. For example,</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>/bin/echo <span class="s2">"This is a parameter"</span>
+This is a parameter</code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">/bin/echo</code> is the path echo, and the string is a parameter. The Environment variable $PATH tells the shell where all the commands are from. Internally, the shell looks for the program in the directories listed in $PATH ($var indicates variable in the Bash shell). If you want to make a program into a command and run it without entering its path, you will need to manually add the path into $PATH. For one-time use, run the command to add a path into $PATH. For example,</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/opt/bin</code></pre></figure>
+
+<p>Or, if you want to make the variable available to other programs,</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/opt/bin</code></pre></figure>
+
+<p>Add the command into your bash profile such as <code class="language-plaintext highlighter-rouge">~/.bash_profile</code>, so that it will be executed everytime a bash instance is open.</p>
+:ET

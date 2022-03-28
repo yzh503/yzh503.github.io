@@ -1,0 +1,3 @@
+I"H<h1 id="why-converting-fortran-to-c">Why converting Fortran to C++</h1>
+<p>Many legacy Fortran programs are still stable and running in the industry. It is often difficult to maintain and extend the legacy code (well, difficult compared with modern languages). I was developing an extension on a Fortran 77 program, but F77 does not support many important modern programming features, which really gave me a hetic. Converting old Fortran to C/C++, it is hoped that we can use C++ features to extend an old program, although it would not improve the readibilty of the code at all.</p>
+:ET

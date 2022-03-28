@@ -1,0 +1,3 @@
+I"¤<h2 id="background">Background</h2>
+<p>Non-constant string comparison time can be a vulnerablity of Basic web authentication. If a web developer did not set up constant response time, attackers may get the password by comparing response time of requests. In this article, we will use <a href="https://pentesterlab.com/exercises/web_for_pentester_II">Web for Pentester II</a> authentication exercise 2 as an example.</p>
+:ET
