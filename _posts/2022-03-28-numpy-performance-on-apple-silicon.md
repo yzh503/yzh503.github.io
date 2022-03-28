@@ -12,7 +12,7 @@ Let Conda recognise your pip packages if you wish to use pip in conda environmen
 ```
 conda config --set pip_interop_enabled true
 ```
-The best practice is still to install packages via conda unless you need to build a wheel locally, such as PyTorch. 
+The best practice is still to install packages via conda unless conda does not have the binary, such as PyTorch. 
 
 # Numpy
 We need a Numpy build with arm64 C-extensions and [vecLib](https://developer.apple.com/documentation/accelerate/veclib) (Apple's BLAS library) mounted. 
@@ -93,4 +93,3 @@ According to this [FAQ](https://doc.pypy.org/en/latest/faq.html#should-i-install
 Use Numpy vectorisation as much as possible so performance intensive snippets will run via C-extension. 
 
 As mentioned in [this article](https://medium.com/codex/pypy-vs-python-49153daca65c) PyPy is also slower than CPython when using SQLite. However in any other cases, PyPy still has an extraodinary performance. 
-
