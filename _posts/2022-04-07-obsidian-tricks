@@ -1,0 +1,88 @@
+---
+layout: post
+title: Obsidian Tricks 
+---
+
+I have recently transferred my notes from Notion to Obsidian for various reasons: 
+
+1. Obsidian supports local files, which can be synchronised in many ways. 
+2. Full data ownership leads to better privacy. 
+3. Notion is slow on very lage pages, easically with a lot of $\LaTeX$ equations.
+4. Most of the Notion functionalities are supported in Obsidian with plugins.
+
+Over the past week I have been discovering tricks of using Obsidian, and here they are: 
+
+Can I create a table of content for my folders?
+---
+
+Use [Folder Note](https://github.com/xpgo/obsidian-folder-note-plugin) to create index for each folder. `cmd/ctrl + click` Will create a note that contians the table of content for the folder. You may edit the default template in the plugin's options in settings to match your style. 
+
+Another useful plugin is [Zoottelkeeper](https://github.com/akosbalasko/zoottelkeeper-obsidian-plugin), which automatically creates an index file in each folder. 
+
+Notion has database. What does Obsidian have? 
+---
+
+Use markdown tables with [Advanced Tables](https://github.com/tgrosinger/advanced-tables-obsidian) plugin, or use [dataview](https://github.com/blacksmithgu/obsidian-dataview) plugin to query the notes in any folder. For example, I query all my journal article notes as a table in the Folder Note page: 
+
+![](/img/Pasted%20image%2020220407201415.png)
+
+With code: 
+
+![](/img/Pasted%20image%2020220407201941.png)
+
+To filter or sort, just add `where` and `sort` clause in the query.
+
+How do you install plugins?
+---
+Browse core and community plugins in settings, or visit their github repositories. 
+
+Is there a easier way to use Latex?
+---
+
+Create your own shortcut. For example, replace `\boldsymbol` with `\b`
+
+```
+$$\newcommand{\b}[1]{\boldsymbol{#1}}$$
+```
+
+Put this into any page and visit it once when Obsidian launches, the command will work until Obsidian is closed. 
+
+Use [Quick Latex](obsidian://show-plugin?id=quick-latex) plugin to autocomplete. 
+
+
+
+Can I modify the theme/fonts/colours?
+---
+
+Open the css snippets folder from settings - appearance, create a css to set variables or override the theme. For example, I want a minimum width for tables so that short words are not wrapped: 
+
+```
+th {
+  white-space: nowrap !important; 
+}
+td {
+  min-width: 5em !important;
+}
+```
+
+Why does my light theme look so grey and unclear?
+---
+
+You might have turned on translucent window. Turn it off in settings - appearance. 
+
+How are files and attachments managed?
+---
+
+If you copy or drag images/files into the eidtor, it will place the file into a default folder for attachment, which is configurable in the settings. Do not use Wikilinks in case you want to migrate notes to other software. 
+
+How do you sync across devices?
+---
+
+Save the vault in OneDrive/Google Drive/iCloud/Dropbox or use the paid add-on service from Obsidian. 
+
+How do you link to blocks?
+---
+
+- type `[[` and the note name, and then type `#` to select the heading. 
+- Use [Copy Block Link](obsidian://show-plugin?id=obsidian-copy-block-link) plugin
+- Put tags around places you want to link, so you can click the tag and get a list of locations. 
