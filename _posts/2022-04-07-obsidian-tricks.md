@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Obsidian Tricks 
+date: 2022-04-07 15:41 +1000
 ---
 
 I have recently transferred my notes from Notion to Obsidian for various reasons: 
@@ -10,7 +11,9 @@ I have recently transferred my notes from Notion to Obsidian for various reasons
 3. Notion is slow on very lage pages, easically with a lot of $$\LaTeX$$ equations.
 4. Most of the Notion functionalities are supported in Obsidian with plugins.
 
-Over the past week I have been discovering tricks of using Obsidian, and here they are: 
+How do you use Obsidian to manage research articles and references? 
+---
+Refer to my next post: [Use Obsidian to manage your research](/2022/04/08/use-obsidian-to-manage-your-research.html)
 
 Can I create a table of content for my folders?
 ---
@@ -28,9 +31,15 @@ Use markdown tables with [Advanced Tables](https://github.com/tgrosinger/advance
 
 With code: 
 
-![](/img/Pasted%20image%2020220407201941.png)
+<pre>
+<code>
+```dataview
+table tags as Tags, year as Year from "Journal Articles/" sort file.name asc
+```
+</code>
+</pre>
 
-To filter or sort, just add `where` and `sort` clause in the query.
+To filter or sort, just add `where` and `sort` clause in the query. See more detials in [Use Obsidian to manage your research](/2022/04/08/use-obsidian-to-manage-your-research.html).
 
 How do you install plugins?
 ---
@@ -41,13 +50,17 @@ Is there a easier way to use Latex?
 
 Create your own shortcut. For example, replace `\boldsymbol` with `\b`
 
+
+<pre><code>
 ```
 $$\newcommand{\b}[1]{\boldsymbol{#1}}$$
 ```
+</code></pre>
+
 
 Put this into any page and visit it once when launching Obsidian, the command will work in all notes until Obsidian is closed. 
 
-Use [Quick Latex](obsidian://show-plugin?id=quick-latex) plugin for autocomplete. 
+Use [Quick Latex](https://github.com/joeyuping/quick_latex_obsidian) plugin for autocomplete. 
 
 
 
@@ -70,8 +83,20 @@ How do you link to blocks?
 
 - type `[[` and the note title, followed by a `#` to select the heading. 
 - Put tags around locations that you want to link, so you can click the tag and get a list of locations in the search panel. 
-- Use [Copy Block Link](obsidian://show-plugin?id=obsidian-copy-block-link).
+- Use [Copy Block Link](https://github.com/mgmeyers/obsidian-copy-block-link).
 
+How do you insert a web link as a bookmark like in Notion?
+---
+
+Install [Rich Link](https://github.com/dhamaniasad/obsidian-rich-links) plugin. Select a link you want to convert to a book mark, then `cmd/ctrl + P` will open the command palette, and type `rich link`. 
+
+Install [Paste URL to Selection](https://github.com/denolehov/obsidian-url-into-selection) so you can select a word and paste url to make a named link. 
+
+
+Can I create a dynamic/interactive note? 
+---
+
+Checkout the plugins like [Templater](https://github.com/SilentVoid13/Templater) [Custom JS](https://github.com/samlewis0602/obsidian-custom-js)  [Buttons](https://github.com/shabegom/buttons) and [React Components](https://github.com/elias-sundqvist/obsidian-react-components).  For example, I use Templater with JavaScript so I can create a Journal Article note with automatic yaml attributes extracted from BibTex. These attributes can be used in query. 
 
 Why does my light theme look so grey and unclear?
 ---
@@ -87,4 +112,3 @@ How do you sync across devices?
 ---
 
 Save the vault in OneDrive/Google Drive/iCloud/Dropbox or use the paid add-on service from Obsidian. 
-
