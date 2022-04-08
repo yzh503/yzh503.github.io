@@ -39,7 +39,7 @@ table tags as Tags, year as Year from "Journal Articles/" sort file.name asc
 </code>
 </pre>
 
-To filter or sort, just add `where` and `sort` clause in the query. See more detials in [Use Obsidian to manage your research](/2022/04/08/use-obsidian-to-manage-your-research.html).
+To filter or sort, just add `where` and `sort` clause in the query. See more examples in [Use Obsidian to manage your research](/2022/04/08/use-obsidian-to-manage-your-research.html).
 
 How do you install plugins?
 ---
