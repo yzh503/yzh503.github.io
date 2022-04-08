@@ -7,7 +7,7 @@ I have recently transferred my notes from Notion to Obsidian for various reasons
 
 1. Obsidian supports local files, which can be synchronised in many ways. 
 2. Full data ownership leads to better privacy. 
-3. Notion is slow on very lage pages, easically with a lot of $\LaTeX$ equations.
+3. Notion is slow on very lage pages, easically with a lot of $$\LaTeX$$ equations.
 4. Most of the Notion functionalities are supported in Obsidian with plugins.
 
 Over the past week I have been discovering tricks of using Obsidian, and here they are: 
@@ -45,9 +45,9 @@ Create your own shortcut. For example, replace `\boldsymbol` with `\b`
 $$\newcommand{\b}[1]{\boldsymbol{#1}}$$
 ```
 
-Put this into any page and visit it once when Obsidian launches, the command will work until Obsidian is closed. 
+Put this into any page and visit it once when launching Obsidian, the command will work in all notes until Obsidian is closed. 
 
-Use [Quick Latex](obsidian://show-plugin?id=quick-latex) plugin to autocomplete. 
+Use [Quick Latex](obsidian://show-plugin?id=quick-latex) plugin for autocomplete. 
 
 
 
@@ -65,6 +65,14 @@ td {
 }
 ```
 
+How do you link to blocks?
+---
+
+- type `[[` and the note title, followed by a `#` to select the heading. 
+- Put tags around locations that you want to link, so you can click the tag and get a list of locations in the search panel. 
+- Use [Copy Block Link](obsidian://show-plugin?id=obsidian-copy-block-link).
+
+
 Why does my light theme look so grey and unclear?
 ---
 
@@ -80,9 +88,3 @@ How do you sync across devices?
 
 Save the vault in OneDrive/Google Drive/iCloud/Dropbox or use the paid add-on service from Obsidian. 
 
-How do you link to blocks?
----
-
-- type `[[` and the note name, and then type `#` to select the heading. 
-- Use [Copy Block Link](obsidian://show-plugin?id=obsidian-copy-block-link) plugin
-- Put tags around places you want to link, so you can click the tag and get a list of locations. 
