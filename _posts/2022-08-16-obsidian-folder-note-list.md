@@ -13,8 +13,12 @@ In Folder Note options, choose
 
 In Initial Content, paste: 
 
-<pre><code class="lang-dataview"><span class="hljs-selector-tag">table</span> file<span class="hljs-selector-class">.ctime</span> AS <span class="hljs-string">"Created"</span> where endswith(file<span class="hljs-selector-class">.folder</span>, this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.folder</span>) or (contains(file<span class="hljs-selector-class">.folder</span>, this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.folder</span>) and contains(file<span class="hljs-selector-class">.folder</span>, file.name)) and file<span class="hljs-selector-class">.name</span> != this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.name</span>
+<pre><code>
+```dataview 
+<span class="hljs-selector-tag">table</span> file<span class="hljs-selector-class">.ctime</span> AS <span class="hljs-string">"Created"</span> where endswith(file<span class="hljs-selector-class">.folder</span>, this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.folder</span>) or (contains(file<span class="hljs-selector-class">.folder</span>, this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.folder</span>) and contains(file<span class="hljs-selector-class">.folder</span>, file.name)) and file<span class="hljs-selector-class">.name</span> != this<span class="hljs-selector-class">.file</span><span class="hljs-selector-class">.name</span>
+```
 </code></pre>
+
 
 Also check Hide Folder Note (recommended).
 
