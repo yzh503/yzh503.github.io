@@ -15,12 +15,10 @@ How do you use Obsidian to manage research articles and references?
 ---
 Refer to my next post: [Use Obsidian to manage your research](/2022/04/08/use-obsidian-to-manage-your-research.html)
 
-Can I create a table of content for my folders?
+Can I see a list of notes as links for each folder?
 ---
 
-Use [Folder Note](https://github.com/xpgo/obsidian-folder-note-plugin) to create index for each folder. `cmd/ctrl + click` Will create a note that contians the table of content for the folder. You may edit the default template in the plugin's options in settings to match your style. 
-
-Another useful plugin is [Zoottelkeeper](https://github.com/akosbalasko/zoottelkeeper-obsidian-plugin), which automatically creates an index file in each folder. 
+Refer to my next post: [Automatic notes list for each folder](/2022/08/16/obsidian-folder-note-list.html)
 
 Notion has database. What does Obsidian have? 
 ---
