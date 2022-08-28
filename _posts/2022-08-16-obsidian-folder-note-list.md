@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Automatic notes list for each folder
+title: Automatic notes list for each folder in Obsidian
 date: 2022-08-16 13:06 +1000
 ---
 
