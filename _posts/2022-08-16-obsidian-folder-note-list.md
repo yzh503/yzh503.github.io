@@ -4,7 +4,7 @@ title: Automatic notes list for each folder in Obsidian
 date: 2022-08-16 13:06 +1000
 ---
 
-If you prefer Notion's style of file navigation - all files are navigated thorugh linkes, you will need two community plugins: 
+If you prefer Notion's style of file navigation - all files are navigated through linkes, you will need two community plugins: 
 1. [Folder Note](https://github.com/xpgo/obsidian-folder-note-plugin) 
 2. [dataview](https://github.com/blacksmithgu/obsidian-dataview)
 
