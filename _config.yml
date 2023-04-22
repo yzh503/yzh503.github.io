@@ -4,7 +4,7 @@ email: simon.yzh@outlook.com
 url: "yzh503.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 description: > # this means to ignore newlines until "twitter_username:"
   Rambling about software development
-
+google_analytics: G-HT1CWPDTF4
 # social links
 
 # dribbble_username: jekyll
